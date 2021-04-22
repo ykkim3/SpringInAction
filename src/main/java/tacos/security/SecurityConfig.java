@@ -36,55 +36,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.access("hasRole('ROLE_USER')")
 		.antMatchers("/","/**").access("permitAll")
 		.and()
-		.httpBasic();
+			.formLogin()
+				.loginPage("/login")
+//					.loginProcessingUrl("/authenticate")
+//					.usernameParameter("user")
+//					.passwordParameter("pwd")
+		.and()
+			.logout()
+				.logoutSuccessUrl("/")
+		.and()
+			.csrf();
+
 	}
 
-	/*
-	 * inmemory store
-	 */
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication()
-//		.withUser("user1")
-//		.password("{noop}password1")
-//		.authorities("ROLE_USER")
-//		.and()
-//		.withUser("user2")
-//		.password("{noop}password2")
-//		.authorities("ROLE_USER");
-//	}
-
-	/*
-	 * jdbc store
-	 */
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.jdbcAuthentication().dataSource(dataSource)
-//		.usersByUsernameQuery("select username, password, enabled from users where username=?")
-//		.authoritiesByUsernameQuery("select username, authority from authorities where username=?")
-//		.passwordEncoder(new NoEncodingPasswordEndoder());
-//	}
-	
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth
-//		.ldapAuthentication()
-//		.userSearchBase("ou=people")
-//		.userSearchFilter("(uid={0})")
-//		.groupSearchBase("ou=groups")
-//		.groupSearchFilter("member={0}")
-//		.contextSource()
-////		.root("dc=tacocloud,dc=com")
-////		.ldif("classpath:users.ldif")
-//		.url("ldap://localhost:8389/dc=tacocloud,dc=com")
-//		.and()
-//		.passwordCompare()
-////		.passwordEncoder(new BCryptPasswordEncoder())
-//		.passwordEncoder(new NoEncodingPasswordEndoder())
-//		.passwordAttribute("userPasscode");
-//	}
-//	
-	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
