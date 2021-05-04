@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "taco.orders",
+      "type": "tacos.web.OrderProps",
+      "sourceType": "tacos.web.OrderProps"
+    }
+  ],
+  "properties": [
+    {
+      "name": "taco.orders.page-size",
+      "type": "java.lang.Integer",
+      "sourceType": "tacos.web.OrderProps"
+    }
+  ],
+  "hints": []
+}
